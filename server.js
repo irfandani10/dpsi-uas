@@ -11,7 +11,7 @@ const authorizeRole = require('./middleware/authmiddleware');
 const {
     createSepatu,
     getAllSepatu,
-    getSepatuById,
+    getSepatuById,~
     updateSepatuById,
     deleteSepatuById
   } = require('./controllers/sepatucontroller');
@@ -37,16 +37,16 @@ dotenv.config();
 router.post('/register', register);
 router.post('/login', login);
 // Sepatu Routes
-router.post('/sepatu', createSepatu);
+router.post('/sepatu', authorizeRole('warehouse'),createSepatu);
 router.get('/sepatu', getAllSepatu);
 router.get('/sepatu/:id', getSepatuById);
-router.put('/sepatu/:id', updateSepatuById);
-router.delete('/sepatu/:id', deleteSepatuById);
+router.put('/sepatu/:id',authorizeRole('warehouse'), updateSepatuById);
+router.delete('/sepatu/:id', authorizeRole('warehouse'),deleteSepatuById);
 // Penjualan Routes
-router.post('/penjualan', createPenjualan);
-router.get('/penjualan', getAllPenjualan);
+router.post('/penjualan', authorizeRole('cashier'),createPenjualan);
+router.get('/penjualan', authorizeRole('cashier'),getAllPenjualan);
 router.get('/penjualan/date/:date', getPenjualanByDate);
-router.delete('/penjualan/:id', deletePenjualanById);
+router.delete('/penjualan/:id', authorizeRole('manager'),deletePenjualanById);
 router.get('/penjualan/summary', authorizeRole('manager'),getTotalIncomeOutcome);
 
 // Example route that only allows 'manager' role
