@@ -11,7 +11,7 @@ const authorizeRole = require('./middleware/authmiddleware');
 const {
     createSepatu,
     getAllSepatu,
-    getSepatuById,~
+    getSepatuById,
     updateSepatuById,
     deleteSepatuById
   } = require('./controllers/sepatucontroller');
