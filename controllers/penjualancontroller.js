@@ -136,9 +136,11 @@ const getTotalIncomeOutcome = async (req, res) => {
 
     res.status(200).json({ totalIncome, totalOutcome });
   } catch (error) {
-    res.status(500).json({ error });
+    console.error('Error fetching total income and outcome:', error);
+    res.status(500).json({ error: error.message });
   }
 };
+
 
 module.exports = {
   createPenjualan,
